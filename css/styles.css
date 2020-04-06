@@ -1,0 +1,18 @@
+canvas {
+	background-color: lightblue;
+}
+html, body {
+  margin: 0;
+}
+body {
+	margin: 0px;
+	background-color: #131D26;
+}
+#topstrip {
+	margin:0px;
+	border:none;
+	background-color: red;
+}
+#gameArea {
+	text-align:center;
+}
