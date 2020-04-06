@@ -7,6 +7,7 @@ function Powerbar_Singleton() {
 	this.cue_visible = true;
 	this.hitsize = Vector2.zero;
 	this.mouse_end = true;
+	this.touch_end = true;
 	this.power = 0;
 }
 
@@ -23,16 +24,25 @@ Powerbar_Singleton.prototype.contains = function(position) {
 
 Powerbar_Singleton.prototype.handleInput = function(controlling_cue) {
 	if(Touch.isTouchDevice) {
-		if(Touch.isTouching) {
+		if(Touch.isTouching) {  
+			this.touch_end = false;
 			var touch_position = Touch.getPosition(0);
 			var touch_initial_position = Touch.getInitialPosition(0);
 			if(Powerbar.contains(touch_initial_position)) {
-				var new_position = this.bg_position.y + (touch_initial_position - touch_position);
-				if(new_position > this.bg_position.y && new_position < 10000) {
+				var new_position = this.bg_position.y + (touch_position.y - touch_initial_position.y);
+				console.log(touch_position - touch_initial_position);
+				if(new_position > this.bg_position.y && new_position < 820) {
 					this.cue_position.y = new_position;
+					this.power = Math.floor(Math.floor((new_position - this.bg_position.y))*100/369);
+					controlling_cue.aim(this.power);
 				}
 			}
 		} else if(!Touch.isTouching) {
+			if(this.touch_end == false) {
+				controlling_cue.shoot(this.power);
+				this.power = 0;
+			}
+			this.touch_end = true;
 			this.cue_position.y = this.bg_position.y;
 		}
 	} else {
