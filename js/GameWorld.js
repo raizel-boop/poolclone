@@ -10,6 +10,7 @@ function GameWorld() {
 						new Vector2(111, 448));
 	
 	this.balls = [ this.cueball ];
+	this.boundaries = [ this.west_boundary ];
 }
 
 GameWorld.prototype.handleInput = function () {

@@ -30,7 +30,6 @@ Powerbar_Singleton.prototype.handleInput = function(controlling_cue) {
 			var touch_initial_position = Touch.getInitialPosition(0);
 			if(Powerbar.contains(touch_initial_position)) {
 				var new_position = this.bg_position.y + (touch_position.y - touch_initial_position.y);
-				console.log(touch_position - touch_initial_position);
 				if(new_position > this.bg_position.y && new_position < 820) {
 					this.cue_position.y = new_position;
 					this.power = Math.floor(Math.floor((new_position - this.bg_position.y))*100/369);

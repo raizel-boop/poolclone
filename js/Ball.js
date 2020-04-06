@@ -11,10 +11,15 @@ function Ball (initPos, sprite) {
     this.inHole = false;
 }
 
+Ball.prototype.handleCollision = function (position) {
+	var collision = false;
+	
+	return collision;
+};
+
 Ball.prototype.shoot = function(power, rotation) {
     this.moving = true;
     this.velocity = calculateBallVelocity(power,rotation);
-	console.log(this.velocity);
 };
 
 Ball.prototype.stop = function(){
@@ -41,7 +46,13 @@ Ball.prototype.updatePosition = function () {
         return;
 	
 	var newPos = this.position.add(this.velocity);
-	this.position = newPos;
+	var collision = this.handleCollision(newPos);
+
+    if(collision){
+		this.velocity.multiplyWith(0.95);
+    }else{
+    	this.position = newPos;
+    }
 }
 
 Ball.prototype.draw = function () {
