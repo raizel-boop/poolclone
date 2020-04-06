@@ -18,7 +18,18 @@ GameWorld.prototype.handleInput = function () {
 };
 
 GameWorld.prototype.update = function () {
-    
+	var moving_flag = false;
+    for (var i = 0; i < this.balls.length; i++) {
+        this.balls[i].update();
+		if(this.balls[i].moving) {
+			moving_flag = true;
+		}
+    }
+	if(!moving_flag) {
+		var temp_cue = this.cue;
+		setTimeout(function(){temp_cue.visible = true;}, 300);
+		this.cue.position = this.cueball.position;
+	}
 };
 
 GameWorld.prototype.draw = function () {

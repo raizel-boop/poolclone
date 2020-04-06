@@ -15,7 +15,16 @@ Cue.prototype.aim = function (power) {
 }
 
 Cue.prototype.shoot = function (power) {
-	this.origin = new Vector2(this.old_origin.copy().x-20, this.old_origin.copy().y);
+	if(!this.visible)
+		return;
+	this.origin = new Vector2(this.old_origin.copy().x, this.old_origin.copy().y);
+	if(power<=2) {
+		return;
+	}
+	Game.gameWorld.cueball.shoot(power, this.rotation);
+	var temp_cue = this;
+	//this.visible = false;
+	setTimeout(function(){temp_cue.visible = false;}, 300);
 }
 
 Cue.prototype.calculate_rotation = function(input_initial, input_current) {
