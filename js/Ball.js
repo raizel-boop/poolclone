@@ -30,22 +30,22 @@ Ball.prototype.stop = function(){
 
 var calculateBallVelocity = function(power, angle){
 
-    return new Vector2(100*Math.cos(angle)*(0.01*power),100*Math.sin(angle)*(0.01*power));
+    return new Vector2(100*Math.cos(angle)*(power),100*Math.sin(angle)*(power));
 }
 
-Ball.prototype.update = function () {
-	this.updatePosition();
-    this.velocity.multiplyWith(0.85);
+Ball.prototype.update = function (delta) {
+	this.updatePosition(delta);
+    this.velocity.multiplyWith(0.95);
 	if(this.moving && Math.abs(this.velocity.x) < 1 && Math.abs(this.velocity.y) < 1){
         this.stop();
     }
 }
 
-Ball.prototype.updatePosition = function () {
+Ball.prototype.updatePosition = function (delta) {
 	if(!this.moving || this.inHole)
         return;
 	
-	var newPos = this.position.add(this.velocity);
+	var newPos = this.position.add(this.velocity.multiply(delta));
 	var collision = this.handleCollision(newPos);
 
     if(collision){

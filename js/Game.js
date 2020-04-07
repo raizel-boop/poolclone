@@ -1,5 +1,7 @@
 "use strict";
 
+var DELTA = 1/100;
+
 var requestAnimationFrame = (function () {
     return  window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
@@ -77,8 +79,8 @@ Game_Singleton.prototype.initialize = function () {
 Game_Singleton.prototype.mainLoop = function () {
 
     //if(DISPLAY && !GAME_STOPPED){
-        Game.gameWorld.handleInput();
-        Game.gameWorld.update();
+        Game.gameWorld.handleInput(DELTA);
+        Game.gameWorld.update(DELTA);
         Canvas2D.clear();
         Game.gameWorld.draw();
         //Mouse.reset();
