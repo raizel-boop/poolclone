@@ -33,8 +33,13 @@ var calculateBallVelocity = function(power, angle){
     return new Vector2(100*Math.cos(angle)*(power),100*Math.sin(angle)*(power));
 }
 
+<<<<<<< HEAD
 Ball.prototype.update = function (delta) {
 	this.updatePosition(delta);
+=======
+Ball.prototype.update = function () {
+	this.updatePosition();
+>>>>>>> 9178a63e649d5d7486f486a0ec93f0c8b6dd2f9a
     this.velocity.multiplyWith(0.95);
 	if(this.moving && Math.abs(this.velocity.x) < 1 && Math.abs(this.velocity.y) < 1){
         this.stop();
